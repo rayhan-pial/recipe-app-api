@@ -6,13 +6,13 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.test import Client
 
+
 class AdminSiteTests(TestCase):
     """Tests for Django admin"""
-
     def setUp(self):
         """ Create user and Client"""
-        self.client= Client()
-        self.admin_user=get_user_model().objects.create_superuser(
+        self.client = Client()
+        self.admin_user = get_user_model().objects.create_superuser(
             email='admin@gmail.com',
             password='admin'
         )
