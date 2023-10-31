@@ -131,7 +131,7 @@ class PrivateRecipeAPITest(TestCase):
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
-        self.assertEqual(recipe.titile, payload['title'])
+        self.assertEqual(recipe.title, payload['title'])
         self.assertEqual(recipe.link, original_link)
         self.assertEqual(recipe.user, self.user)
 
@@ -141,7 +141,7 @@ class PrivateRecipeAPITest(TestCase):
             user=self.user,
             title='Sample test',
             link='https://example.com/recipe.pdf',
-            despription='sample description',
+            description='sample description',
         )
 
         payload = {
@@ -180,7 +180,7 @@ class PrivateRecipeAPITest(TestCase):
         res = self.client.delete(url)
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertEqual(Recipe.objects.filter(id=recipe.id).exists())
+        self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
 
     def test_delete_other_users_recipe_error(self):
         """Test trying to delete other user's recipe"""
@@ -191,4 +191,4 @@ class PrivateRecipeAPITest(TestCase):
         res = self.client.delete(url)
 
         self.assertEqual(res.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertTrue(Recipe.objects, filter(id=recipe.id).exists())
+        self.assertTrue(Recipe.objects.filter(id=recipe.id).exists())
