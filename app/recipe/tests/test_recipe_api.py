@@ -402,7 +402,7 @@ class PrivateRecipeAPITest(TestCase):
         in1 = Ingredient.objects.create(user=self.user, name='Cheese')
         in2 = Ingredient.objects.create(user=self.user, name='chicken')
         r1.ingredients.add(in1)
-        r2.ingre.add(in2)
+        r2.ingredients.add(in2)
 
         payload = {'ingredients': f'{in1.id}, {in2.id}'}
         res = self.client.get(RECIPES_URL, payload)
